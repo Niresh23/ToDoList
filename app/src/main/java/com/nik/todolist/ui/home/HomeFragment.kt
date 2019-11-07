@@ -13,7 +13,7 @@ import com.nik.todolist.R
 import kotlinx.android.synthetic.main.fragment_home.*
 
 class HomeFragment : Fragment() {
-
+    private val qq = ""
     private lateinit var homeViewModel: HomeViewModel
     private lateinit var adapter: NotesRVAdapter
     override fun onCreateView(
