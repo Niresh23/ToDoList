@@ -8,7 +8,7 @@ import com.nik.todolist.Data.intity.Note
 import com.nik.todolist.R
 import kotlinx.android.synthetic.main.item_list_layout.view.*
 
-class NotesRVAdapter : RecyclerView.Adapter<NotesRVAdapter.ViewHolder>() {
+class NotesRVAdapter(val onItemClick: ((Note) -> Unit)? = null) : RecyclerView.Adapter<NotesRVAdapter.ViewHolder>() {
 
     var notes: List<Note> = listOf()
         set(value) {
@@ -23,10 +23,14 @@ class NotesRVAdapter : RecyclerView.Adapter<NotesRVAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ViewHolder(LayoutInflater.from(parent.context)
         .inflate(R.layout.item_list_layout, parent, false))
 
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(note: Note) = with(itemView) {
             tv_time.text = note.time
             tv_doing.text = note.text
+
+            itemView.setOnClickListener{
+                onItemClick?.invoke(note)
+            }
         }
     }
 }
