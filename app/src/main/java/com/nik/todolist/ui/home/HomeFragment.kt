@@ -9,12 +9,10 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.nik.todolist.MainActivity
 import com.nik.todolist.R
-import com.nik.todolist.extension.replaceFragmentSafely
-import com.nik.todolist.ui.note.NoteFragment
 import kotlinx.android.synthetic.main.fragment_home.*
 
 class HomeFragment : Fragment() {
@@ -37,8 +35,7 @@ class HomeFragment : Fragment() {
         fab.setOnClickListener { view ->
 //            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
 //                .setAction("Action", null).show()
-            val navController = Navigation.findNavController((activity as MainActivity)!!, R.id.mobile_navigation)
-            navController.navigate(R.id.nav_tools)
+            view.findNavController().navigate(R.id.action_home_to_note)
         }
         return root
     }

@@ -8,8 +8,10 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.findNavController
 import com.nik.todolist.Data.intity.Note
 import com.nik.todolist.R
 import kotlinx.android.synthetic.main.fragment_note.*
@@ -63,6 +65,8 @@ class NoteFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initView()
+        view.findViewById<Button>(R.id.btn_save).setOnClickListener { view ->
+            view.findNavController().navigate(R.id.action_note_to_home)}
     }
 
     private fun initView() {
