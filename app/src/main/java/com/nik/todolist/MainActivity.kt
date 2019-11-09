@@ -13,6 +13,8 @@ import com.google.android.material.navigation.NavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import android.view.Menu
+import com.nik.todolist.extension.replaceFragmentSafely
+import com.nik.todolist.ui.note.NoteFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -22,7 +24,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         initToolbar()
-        initActionBtn()
+
+
+//        initActionBtn()
         initDrawerLayout()
     }
 
@@ -42,13 +46,13 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
     }
 
-    private fun initActionBtn() {
-        val fab: FloatingActionButton = findViewById(R.id.fab)
-        fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
-        }
-    }
+//    private fun initActionBtn() {
+//        val fab: FloatingActionButton = findViewById(R.id.fab)
+//        fab.setOnClickListener { view ->
+//            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+//                .setAction("Action", null).show()
+//        }
+//    }
 
     private fun initDrawerLayout() {
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
@@ -65,4 +69,9 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
     }
+
+    fun replaceFragment() {
+        replaceFragment()
+    }
 }
+
