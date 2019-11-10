@@ -28,7 +28,9 @@ android {
 }
 
 dependencies {
-
+    //Timber
+    implementation 'com.github.ajalt:timberkt:1.5.1'
+    //
     //FireBase
     implementation 'com.google.firebase:firebase-core:16.0.9'
     implementation 'com.google.firebase:firebase-firestore:19.0.1'

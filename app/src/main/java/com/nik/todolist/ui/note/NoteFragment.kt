@@ -43,7 +43,6 @@ class NoteFragment : Fragment() {
 
     companion object {
         private val EXTRA_NOTE = NoteFragment::class.java.name + "extra.note"
-        private const val DATE_TIME_FORMAT = "dd.MM.yy HH:mm"
         fun start (context: Context, note: Note? = null) {
             val intent = Intent(context, NoteFragment::class.java)
             intent.putExtra(EXTRA_NOTE, note)
@@ -66,7 +65,8 @@ class NoteFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         initView()
         view.findViewById<Button>(R.id.btn_save).setOnClickListener { view ->
-            view.findNavController().navigate(R.id.action_note_to_home)}
+            view.findNavController().navigate(R.id.action_note_to_home)
+            }
     }
 
     private fun initView() {

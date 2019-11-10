@@ -2,35 +2,13 @@ package com.nik.todolist.Data
 
 import androidx.lifecycle.MutableLiveData
 import com.nik.todolist.Data.intity.Note
+import com.nik.todolist.Data.provider.FireStoreProvider
+import com.nik.todolist.Data.provider.RemoteDataProvider
 
 object NotesRepository {
+    private val remoteProvider: RemoteDataProvider = FireStoreProvider()
 
-    private val notesLiveData = MutableLiveData<List<Note>>()
-
-
-    private val notes = mutableListOf<Note>(
-        Note("10:30", "To do something"))
-
-    init{
-        notesLiveData.value = notes
-    }
-
-    fun getNotes():List<Note> {
-        return notes
-    }
-
-    fun saveNote(note: Note){
-        addOrReplase(note)
-        notesLiveData.value = notes
-    }
-
-    private fun addOrReplase(note: Note) {
-        for(i in notes.indices) {
-            if(notes[i] == note) {
-                notes[i] = note
-                return
-            }
-        }
-        notes.add(note)
-    }
+    fun getNotes() = remoteProvider.subscribeToAllNotes()
+    fun saveNote(note: Note) = remoteProvider.saveNote(note)
+    fun getNoteById(id: String) = remoteProvider.getNoteById(id)
 }
