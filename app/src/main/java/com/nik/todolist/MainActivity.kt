@@ -1,8 +1,6 @@
 package com.nik.todolist
 
 import android.os.Bundle
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.snackbar.Snackbar
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
@@ -13,37 +11,16 @@ import com.google.android.material.navigation.NavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import android.view.Menu
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
-import com.nik.todolist.Data.intity.Note
-import com.nik.todolist.extension.replaceFragmentSafely
-import com.nik.todolist.ui.base.BaseActivity
-import com.nik.todolist.ui.base.BaseViewModel
-import com.nik.todolist.ui.note.NoteFragment
 
-class MainActivity : BaseActivity<List<Note>?, MainViewState> {
+class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
-
-    override val viewModel: MainViewModel by lazy {
-        ViewModelProviders.of(this).get(MainViewModel::class.java)
-    }
-    override val layoutRes: Int = R.layout.activity_main
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         initToolbar()
-
-
-//        initActionBtn()
         initDrawerLayout()
-    }
-
-    override fun renderData(data: List<Note>?) {
-        data?.let{
-
-        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -62,14 +39,6 @@ class MainActivity : BaseActivity<List<Note>?, MainViewState> {
         setSupportActionBar(toolbar)
     }
 
-//    private fun initActionBtn() {
-//        val fab: FloatingActionButton = findViewById(R.id.fab)
-//        fab.setOnClickListener { view ->
-//            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                .setAction("Action", null).show()
-//        }
-//    }
-
     private fun initDrawerLayout() {
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
         val navView: NavigationView = findViewById(R.id.nav_view)
@@ -84,10 +53,6 @@ class MainActivity : BaseActivity<List<Note>?, MainViewState> {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
-    }
-
-    fun replaceFragment() {
-        replaceFragment()
     }
 }
 
