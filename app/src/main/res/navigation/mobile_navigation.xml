@@ -53,7 +53,7 @@
 
     <fragment
         android:id="@+id/nav_send"
-        android:name="com.nik.todolist.ui.send.SendFragment"
+        android:name="com.nik.todolist.ui.spalsh.SplashFragment"
         android:label="@string/menu_send"
         tools:layout="@layout/fragment_send" />
 </navigation>

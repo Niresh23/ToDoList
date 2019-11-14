@@ -1,4 +1,4 @@
-package com.nik.todolist.ui.send
+package com.nik.todolist.ui.spalsh
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,20 +10,20 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.nik.todolist.R
 
-class SendFragment : Fragment() {
+class SplashFragment : Fragment() {
 
-    private lateinit var sendViewModel: SendViewModel
+    private lateinit var splashViewModel: SplashViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        sendViewModel =
-            ViewModelProviders.of(this).get(SendViewModel::class.java)
+        splashViewModel =
+            ViewModelProviders.of(this).get(SplashViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_send, container, false)
         val textView: TextView = root.findViewById(R.id.text_send)
-        sendViewModel.text.observe(this, Observer {
+        splashViewModel.text.observe(this, Observer {
             textView.text = it
         })
         return root

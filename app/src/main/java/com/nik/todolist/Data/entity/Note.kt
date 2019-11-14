@@ -1,4 +1,4 @@
-package com.nik.todolist.Data.intity
+package com.nik.todolist.Data.entity
 
 
 import android.os.Parcelable
@@ -11,7 +11,7 @@ data class Note(val id: String = "",
 
 ) : Parcelable {
     override fun equals(other: Any?): Boolean {
-        if(this == other) return true
+        if(this === other) return true
         if(javaClass != other?.javaClass) return false
 
         other as Note

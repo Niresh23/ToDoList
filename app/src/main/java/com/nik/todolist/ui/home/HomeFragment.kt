@@ -4,12 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.nik.todolist.Data.intity.Note
+import com.nik.todolist.Data.entity.Note
 import com.nik.todolist.R
 import com.nik.todolist.ui.base.BaseFragment
 import com.nik.todolist.ui.note.NoteFragment

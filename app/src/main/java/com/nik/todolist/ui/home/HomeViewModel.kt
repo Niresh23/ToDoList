@@ -1,11 +1,9 @@
 package com.nik.todolist.ui.home
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModel
 import com.nik.todolist.Data.NotesRepository
-import com.nik.todolist.Data.intity.Note
+import com.nik.todolist.Data.entity.Note
 import com.nik.todolist.Data.model.NoteResult
 import com.nik.todolist.ui.base.BaseViewModel
 

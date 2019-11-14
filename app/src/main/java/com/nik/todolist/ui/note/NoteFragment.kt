@@ -1,6 +1,5 @@
 package com.nik.todolist.ui.note
 
-import android.app.ActionBar
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -11,14 +10,11 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
-import com.google.android.material.appbar.AppBarLayout
-import com.nik.todolist.Data.intity.Note
+import com.nik.todolist.Data.entity.Note
 import com.nik.todolist.R
 import com.nik.todolist.ui.base.BaseFragment
-import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.fragment_note.*
 import java.util.*
 

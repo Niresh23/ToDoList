@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.nik.todolist.Data.intity.Note
+import com.nik.todolist.Data.entity.Note
 import com.nik.todolist.R
 import kotlinx.android.synthetic.main.item_list_layout.view.*
 
