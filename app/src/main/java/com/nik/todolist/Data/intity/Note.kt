@@ -5,9 +5,10 @@ import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class Note(val time: String = "",
-                val text: String = "",
-                val id: String = ""
+data class Note(val id: String = "",
+                val time: String = "",
+                val text: String = ""
+
 ) : Parcelable {
     override fun equals(other: Any?): Boolean {
         if(this == other) return true

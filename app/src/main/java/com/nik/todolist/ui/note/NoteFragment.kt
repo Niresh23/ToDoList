@@ -1,5 +1,6 @@
 package com.nik.todolist.ui.note
 
+import android.app.ActionBar
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -13,10 +14,13 @@ import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
+import com.google.android.material.appbar.AppBarLayout
 import com.nik.todolist.Data.intity.Note
 import com.nik.todolist.R
 import com.nik.todolist.ui.base.BaseFragment
+import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.fragment_note.*
+import java.util.*
 
 class NoteFragment : BaseFragment<Note?, NoteViewState>() {
 
@@ -27,11 +31,8 @@ class NoteFragment : BaseFragment<Note?, NoteViewState>() {
 
     private val textChangedListener = object : TextWatcher {
         override fun afterTextChanged(p0: Editable?) {
-            saveNote()
         }
-
         override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
-
         override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
 
     }
@@ -42,14 +43,14 @@ class NoteFragment : BaseFragment<Note?, NoteViewState>() {
         note = note?.copy(
             time = et_time.text.toString(),
             text = et_body.text.toString()
-        ) ?: Note(et_time.text.toString(), et_body.text.toString())
+        ) ?: Note(UUID.randomUUID().toString(), et_time.text.toString(), et_body.text.toString())
 
         note?.let { viewModel.save(it) }
     }
 
     companion object {
         private val EXTRA_NOTE = NoteFragment::class.java.name + "extra.note"
-        fun start (view: View, context: Context?, noteId: String? = null) = Intent(context, NoteFragment::class.java).run {
+        fun start (view: View, context: Context?, noteId: String?) = Intent(context, NoteFragment::class.java).run {
             putExtra(EXTRA_NOTE, noteId)
             view.findNavController().navigate(R.id.action_home_to_note)
         }
@@ -68,9 +69,12 @@ class NoteFragment : BaseFragment<Note?, NoteViewState>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        val noteId = activity?.intent?.getStringExtra(EXTRA_NOTE)
+        noteId?.let {
+            viewModel.loadNote(it)
+        }
         view.findViewById<Button>(R.id.btn_save).setOnClickListener { view ->
-            view.findNavController().navigate(R.id.action_note_to_home)
+            saveNote()
             }
         initView()
     }

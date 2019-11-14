@@ -53,6 +53,7 @@ class FireStoreProvider : RemoteDataProvider {
                 result.value = NoteResult.Success(note)
             }.addOnFailureListener {
                 Timber.d { "Error saving note $note, message: ${it.message}"}
+                result.value = NoteResult.Error(it)
             }
         return result
     }
