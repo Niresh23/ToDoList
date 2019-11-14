@@ -10,10 +10,12 @@ import com.nik.todolist.ui.base.BaseViewState
 
 class SplashViewModel : BaseViewModel<Boolean?, SplashViewState>() {
 
+
     private val _text = MutableLiveData<String>().apply {
         value = "This is send Fragment"
     }
     val text: LiveData<String> = _text
+
     fun requestUser() {
         NotesRepository.getCurrentUser().observeForever {
             viewStateLiveData.value = if(it != null) {
