@@ -12,7 +12,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import android.view.Menu
 import android.view.MenuItem
-import com.nik.todolist.ui.home.LogoutDialog
+import com.firebase.ui.auth.AuthUI
+import org.jetbrains.anko.alert
 
 class MainActivity : AppCompatActivity() {
 
@@ -37,8 +38,20 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun showLogoutDialog() {
-        supportFragmentManager.findFragmentByTag(LogoutDialog.TAG) ?:
-        LogoutDialog.createInstance().show(supportFragmentManager, LogoutDialog.TAG)
+        alert {
+            titleResource = R.string.logout_dialog_title
+            messageResource = R.string.logout_dialog_message
+            positiveButton(getString(R.string.logout_dialog_ok)) { onLogout() }
+            negativeButton(getString(R.string.logout_dialog_cancel)) { dialog -> dialog.dismiss() }
+        }.show()
+    }
+
+    private fun onLogout() {
+        AuthUI.getInstance()
+            .signOut(this)
+            .addOnCompleteListener {
+                findNavController(R.id.nav_host_fragment).navigate(R.id.action_home_to_send)
+            }
     }
 
     override fun onSupportNavigateUp(): Boolean {

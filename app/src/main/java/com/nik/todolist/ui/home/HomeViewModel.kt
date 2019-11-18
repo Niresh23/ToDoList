@@ -7,7 +7,7 @@ import com.nik.todolist.Data.entity.Note
 import com.nik.todolist.Data.model.NoteResult
 import com.nik.todolist.ui.base.BaseViewModel
 
-class HomeViewModel : BaseViewModel<List<Note>?, HomeViewState>() {
+class HomeViewModel(private val notesRepository: NotesRepository) : BaseViewModel<List<Note>?, HomeViewState>() {
 
     private val noteObserver = Observer<NoteResult> {
         it ?: return@Observer
@@ -22,7 +22,7 @@ class HomeViewModel : BaseViewModel<List<Note>?, HomeViewState>() {
         }
     }
 
-    private val repositoryNotes = NotesRepository.getNotes()
+    private val repositoryNotes = notesRepository.getNotes()
 
     init {
         viewStateLiveData.value = HomeViewState()

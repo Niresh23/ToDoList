@@ -16,7 +16,15 @@
             app:enterAnim="@anim/nav_default_enter_anim"
             app:exitAnim="@anim/nav_default_pop_exit_anim"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
-            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+            app:popExitAnim="@anim/nav_default_pop_exit_anim">
+            <argument
+                android:name="note_id"
+                app:argType="string" />
+        </action>
+        <action
+            android:id="@+id/action_home_to_send"
+            app:destination="@id/nav_send" />
+
     </fragment>
 
     <fragment
@@ -55,5 +63,9 @@
         android:id="@+id/nav_send"
         android:name="com.nik.todolist.ui.spalsh.SplashFragment"
         android:label="@string/menu_send"
-        tools:layout="@layout/fragment_send" />
+        tools:layout="@layout/fragment_send" >
+        <action
+            android:id="@+id/action_splash_to_home"
+            app:destination="@id/nav_home" />
+    </fragment>
 </navigation>

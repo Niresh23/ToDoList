@@ -8,7 +8,7 @@ import com.nik.todolist.Data.errors.NoAuthException
 import com.nik.todolist.ui.base.BaseViewModel
 import com.nik.todolist.ui.base.BaseViewState
 
-class SplashViewModel : BaseViewModel<Boolean?, SplashViewState>() {
+class SplashViewModel(private val notesRepository: NotesRepository) : BaseViewModel<Boolean?, SplashViewState>() {
 
 
     private val _text = MutableLiveData<String>().apply {
@@ -17,7 +17,7 @@ class SplashViewModel : BaseViewModel<Boolean?, SplashViewState>() {
     val text: LiveData<String> = _text
 
     fun requestUser() {
-        NotesRepository.getCurrentUser().observeForever {
+        notesRepository.getCurrentUser().observeForever {
             viewStateLiveData.value = if(it != null) {
                 SplashViewState(anthenticated = true)
             } else {

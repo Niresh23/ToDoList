@@ -13,20 +13,19 @@ import com.nik.todolist.Data.errors.NoAuthException
 
 import com.nik.todolist.Data.model.NoteResult
 
-class FireStoreProvider : RemoteDataProvider {
+class FireStoreProvider(private val firebaseAuth: FirebaseAuth,
+                        private val store: FirebaseFirestore) : RemoteDataProvider {
 
     companion object {
         private const val NOTES_COLLECTION = "notes"
         private const val USERS_COLLECTION = "users"
     }
 
-    private val store by lazy { FirebaseFirestore.getInstance() }
-
     private val notesReference by lazy { store.collection(NOTES_COLLECTION) }
 
 
     private val currentUser
-        get() = FirebaseAuth.getInstance().currentUser
+        get() = firebaseAuth.currentUser
 
     override fun getCurrentUser() = MutableLiveData<User?>().apply{
         value = currentUser?.let {
@@ -69,11 +68,24 @@ class FireStoreProvider : RemoteDataProvider {
         try {
             getUserNotesCollection().document(note.id)
                 .set(note)
-                .addOnSuccessListener { snapshot ->
+                .addOnSuccessListener { _ ->
                     Timber.d { "Note $note is saved" }
                     value = NoteResult.Success(note)
                 }.addOnFailureListener {
                     Timber.d { "Error saving note $note, message: ${it.message}"}
+                    value = NoteResult.Error(it)
+                }
+        } catch (e:Throwable) {
+            value = NoteResult.Error(e)
+        }
+    }
+    override fun deleteNote(noteId: String) = MutableLiveData<NoteResult>().apply {
+        try {
+            getUserNotesCollection().document(noteId)
+                .delete()
+                .addOnSuccessListener { _ ->
+                    value = NoteResult.Success(null)
+                }.addOnFailureListener {
                     value = NoteResult.Error(it)
                 }
         } catch (e:Throwable) {

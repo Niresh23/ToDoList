@@ -12,14 +12,14 @@ import com.nik.todolist.Data.errors.NoAuthException
 import com.nik.todolist.R
 
 abstract class BaseFragment<T, S : BaseViewState<T>> : Fragment(){
-    abstract val viewModel: BaseViewModel<T, S>
+    abstract val model: BaseViewModel<T, S>
 
     companion object {
         private const val RC_SIGN_IN = 4242
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.getViewState().observe(this, Observer<S>{
+        model.getViewState().observe(this, Observer<S>{
             it ?: return@Observer
             it.error?.let {
                 renderError(it)
