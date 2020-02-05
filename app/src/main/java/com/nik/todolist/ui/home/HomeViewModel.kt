@@ -1,5 +1,6 @@
 package com.nik.todolist.ui.home
 
+import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import com.nik.todolist.Data.NotesRepository
@@ -29,9 +30,9 @@ class HomeViewModel(private val notesRepository: NotesRepository) : BaseViewMode
         repositoryNotes.observeForever(noteObserver)
     }
 
-    override fun onCleared() {
+    @VisibleForTesting
+    public override fun onCleared() {
         repositoryNotes.removeObserver(noteObserver)
         super.onCleared()
     }
-    fun viewState(): LiveData<HomeViewState> = viewStateLiveData
 }

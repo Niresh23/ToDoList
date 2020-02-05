@@ -21,8 +21,6 @@ class FireStoreProvider(private val firebaseAuth: FirebaseAuth,
         private const val USERS_COLLECTION = "users"
     }
 
-    private val notesReference by lazy { store.collection(NOTES_COLLECTION) }
-
 
     private val currentUser
         get() = firebaseAuth.currentUser
@@ -34,17 +32,18 @@ class FireStoreProvider(private val firebaseAuth: FirebaseAuth,
     }
 
     override fun subscribeToAllNotes() = MutableLiveData<NoteResult>().apply {
-        notesReference.addSnapshotListener { snapshot, e ->
-            e?.let { value = NoteResult.Error(it) }
-                ?: let {
-                    snapshot?.let {
-                        val notes = mutableListOf<Note>()
-                        for (doc: QueryDocumentSnapshot in snapshot) {
-                            notes.add(doc.toObject(Note::class.java))
+        try {
+            getUserNotesCollection().addSnapshotListener { snapshot, e ->
+                e?.let { value = NoteResult.Error(it) }
+                    ?: let {
+                        snapshot?.let {
+                            val notes = it.documents.map { it.toObject(Note::class.java) }
+                            value = NoteResult.Success(notes)
                         }
-                        value = NoteResult.Success(notes)
                     }
-                }
+            }
+        } catch (e: Throwable) {
+            value = NoteResult.Error(e)
         }
     }
 

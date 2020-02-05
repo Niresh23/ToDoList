@@ -51,10 +51,10 @@ class NoteFragment : BaseFragment<NoteViewState.Data, NoteViewState>() {
         noteId?.let {
             model.loadNote(it)
         }
-        view.findViewById<Button>(R.id.btn_save).setOnClickListener { view ->
+        view.findViewById<Button>(R.id.btn_save).setOnClickListener {
             saveNote()
         }
-        view.findViewById<Button>(R.id.btn_delete).setOnClickListener { view ->
+        view.findViewById<Button>(R.id.btn_delete).setOnClickListener {
             deleteNote()
         }
         initView()

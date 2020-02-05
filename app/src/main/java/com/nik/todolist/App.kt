@@ -1,4 +1,4 @@
-package com.nik.todolist.ui
+package com.nik.todolist
 
 import android.app.Application
 import com.github.ajalt.timberkt.Timber

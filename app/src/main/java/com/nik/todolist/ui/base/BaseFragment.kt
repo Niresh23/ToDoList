@@ -30,14 +30,14 @@ abstract class BaseFragment<T, S : BaseViewState<T>> : Fragment(){
     }
     abstract fun renderData(data: T)
 
-    private fun renderError(error: Throwable) = error?.let {
+    private fun renderError(error: Throwable) =
         when(error) {
             is NoAuthException -> startLogin()
-            else -> it.message?.let {message ->
+            else -> error.message?.let {message ->
                 showError(message)
             }
         }
-    }
+
 
     private fun startLogin() {
         val providers = listOf(
